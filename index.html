@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1">&lt;title&gt;Prototipo · Escaneo de datos de cuenta · Ualá&lt;/title&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">:root{--grey-0:#fff;--grey-50:#f5f6fa;--grey-100:#f0f1f5;--grey-200:#ebedf2;--grey-300:#dadee6;--grey-400:#c2c7d5;--grey-500:#aeb5c8;--grey-600:#6b6f81;--grey-700:#595c6a;--grey-800:#444653;--grey-900:#2f313c;--grey-950:#21222d;--grey-1000:#000;--blue-50:#e3ecfd;--blue-100:#c7d8fa;--blue-200:#a4bff8;--blue-400:#406ae4;--blue-500:#162dce;--blue-600:#1224a5;--blue-700:#0d1b7c;--light-blue-100:#def4ff;--light-blue-500:#5bc8ff;--light-blue-700:#377899;--lime-200:#e6ffd0;--lime-500:#c0fe8a;--lime-700:#739853;--green-100:#ccede3;--green-300:#99dbc7;--green-500:#54c4a2;--green-600:#449c82;--green-700:#1c8367;--red-100:#f7bbc0;--red-200:#f5a5ab;--red-300:#f07781;--red-500:#e61d2d;--red-600:#b81724;--orange-500:#fda933;--opacity-default-50:rgba(33,34,45,.5);--opacity-default-60:rgba(33,34,45,.6);--opacity-default-70:rgba(33,34,45,.7);--opacity-default-90:rgba(33,34,45,.9);--opacity-inverted-10:rgba(255,255,255,.1);--opacity-inverted-20:rgba(255,255,255,.2);--opacity-inverted-30:rgba(255,255,255,.3);--text-primary:var(--grey-900);--text-secondary:var(--grey-700);--text-tertiary:var(--grey-500);--text-inverted:var(--grey-0);--text-onaction-primary:var(--grey-0);--text-action:var(--blue-500);--text-success:var(--green-600);--text-error:var(--red-500);--surface-primary:var(--grey-50);--surface-secondary:var(--grey-0);--surface-action-primary:var(--blue-500);--surface-success-secondary:var(--green-300);--surface-error-secondary:var(--red-200);--surface-overlay:var(--opacity-default-90);--screen-primary:var(--grey-0);--screen-secondary:var(--grey-50);--border-tertiary:var(--grey-200);--border-secondary:var(--grey-300);--icon-primary:var(--grey-900);--icon-secondary:var(--grey-700);--icon-tertiary:var(--grey-500);--icon-action:var(--blue-500);--icon-onaction:var(--grey-0);--icon-inverted:var(--grey-0);--icon-success:var(--green-600);--icon-error:var(--red-500);--sp-100:4px;--sp-200:8px;--sp-300:12px;--sp-400:16px;--sp-500:20px;--sp-600:24px;--sp-800:32px;--sp-1000:40px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-pill:999px;--font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}</p>
+<p class="p1">*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}</p>
+<p class="p1">html,body{height:100%;font-family:var(--font-family);background:var(--grey-950);color:var(--text-primary);overflow:hidden;-webkit-font-smoothing:antialiased}</p>
+<p class="p1">body{display:flex;align-items:center;justify-content:center;flex-direction:column}</p>
+<p class="p1">.device-frame{position:relative;width:100%;max-width:375px;height:100vh;max-height:811px;background:var(--screen-primary);overflow:hidden;border-radius:0}</p>
+<p class="p1">@media(min-width:500px){.device-frame{border-radius:38px;box-shadow:0 0 0 12px var(--grey-1000),0 30px 60px rgba(0,0,0,.4);margin:12px}}</p>
+<p class="p1">.screen{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--screen-primary);display:none;flex-direction:column;overflow:hidden}</p>
+<p class="p1">.screen.active{display:flex}</p>
+<p class="p1">.screen-dark{background:var(--grey-950)}</p>
+<p class="p1">.status-bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-600);flex-shrink:0;z-index:5;font-weight:500}</p>
+<p class="p1">.status-bar.dark{color:var(--grey-0)}</p>
+<p class="p1">.status-bar.light{color:var(--text-primary)}</p>
+<p class="p1">.status-time{font-size:14px;font-weight:500}</p>
+<p class="p1">.status-icons{display:flex;gap:6px;align-items:center}</p>
+<p class="p1">.status-icons .dot{width:16px;height:9px;background:currentColor;border-radius:2px}</p>
+<p class="p1">.header{display:flex;align-items:center;gap:14px;padding:var(--sp-200) var(--sp-500) var(--sp-400);flex-shrink:0}</p>
+<p class="p1">.header-back{width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:-8px;border-radius:50%;color:var(--icon-primary)}</p>
+<p class="p1">.header-back:active{background:var(--grey-100)}</p>
+<p class="p1">.header-title{font-size:17px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.btn-primary{width:100%;padding:16px;background:var(--surface-action-primary);color:var(--text-onaction-primary);border:none;border-radius:var(--r-md);font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;transition:opacity .15s}</p>
+<p class="p1">.btn-primary:active{opacity:.85}</p>
+<p class="p1">.btn-secondary{width:100%;padding:14px;background:transparent;color:var(--text-primary);border:1px solid var(--border-secondary);border-radius:var(--r-md);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}</p>
+<p class="p1">.btn-secondary:active{background:var(--surface-primary)}</p>
+<p class="p1">/* HOME */</p>
+<p class="p1">.home-header{background:linear-gradient(180deg,var(--blue-500) 0%,var(--blue-400) 100%);color:var(--grey-0);padding:0 0 var(--sp-600);flex-shrink:0}</p>
+<p class="p1">.home-status-bar{color:var(--grey-0)!important}</p>
+<p class="p1">.home-top-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-200) var(--sp-500)}</p>
+<p class="p1">.home-user{display:flex;align-items:center;gap:var(--sp-300)}</p>
+<p class="p1">.home-user-avatar{width:40px;height:40px;border-radius:50%;background:var(--light-blue-100);color:var(--blue-500);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}</p>
+<p class="p1">.home-user-name{font-size:18px;font-weight:500;color:var(--grey-0)}</p>
+<p class="p1">.home-top-actions{display:flex;gap:var(--sp-300);color:var(--grey-0)}</p>
+<p class="p1">.home-top-actions button{width:36px;height:36px;background:transparent;border:1.5px solid var(--opacity-inverted-30);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--grey-0);position:relative}</p>
+<p class="p1">.notification-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--red-500);border-radius:50%;border:2px solid var(--blue-500)}</p>
+<p class="p1">.home-balance-section{text-align:center;padding:var(--sp-500) var(--sp-500) var(--sp-400)}</p>
+<p class="p1">.home-balance-row{display:flex;align-items:center;justify-content:center;gap:var(--sp-300);margin-bottom:var(--sp-300)}</p>
+<p class="p1">.home-balance-label{font-size:14px;color:var(--grey-0);opacity:.95}</p>
+<p class="p1">.currency-toggle{display:flex;background:var(--opacity-inverted-20);border-radius:var(--r-pill);padding:3px;font-size:12px;font-weight:500}</p>
+<p class="p1">.currency-toggle-item{padding:4px 10px;border-radius:var(--r-pill);display:flex;align-items:center;gap:4px;color:var(--grey-0)}</p>
+<p class="p1">.currency-toggle-item.active{background:var(--grey-0);color:var(--blue-500)}</p>
+<p class="p1">.home-balance-amount{display:flex;align-items:baseline;justify-content:center;gap:var(--sp-300);color:var(--grey-0)}</p>
+<p class="p1">.home-balance-currency{font-size:32px;font-weight:500}</p>
+<p class="p1">.home-balance-integer{font-size:56px;font-weight:700;letter-spacing:-2px;line-height:1}</p>
+<p class="p1">.home-balance-decimal{font-size:32px;font-weight:500;opacity:.85}</p>
+<p class="p1">.home-balance-eye{align-self:center;color:var(--grey-0);opacity:.85;margin-left:4px}</p>
+<p class="p1">.home-message{text-align:center;color:var(--grey-0);font-size:14px;opacity:.95;margin-bottom:var(--sp-400)}</p>
+<p class="p1">.home-tasa-pill{display:flex;align-items:center;gap:var(--sp-300);background:var(--opacity-inverted-20);border-radius:var(--r-pill);padding:8px 16px 8px 8px;margin:0 auto var(--sp-500);width:fit-content;cursor:pointer}</p>
+<p class="p1">.tasa-badge{background:var(--lime-500);color:var(--grey-900);border-radius:var(--r-pill);padding:4px 10px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px}</p>
+<p class="p1">.tasa-text{color:var(--grey-0);font-size:14px;font-weight:500}</p>
+<p class="p1">.home-quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-200);padding:0 var(--sp-500) var(--sp-500)}</p>
+<p class="p1">.home-action{background:transparent;border:none;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:var(--sp-200);padding:0}</p>
+<p class="p1">.home-action-circle{width:56px;height:56px;border-radius:50%;background:var(--opacity-inverted-20);display:flex;align-items:center;justify-content:center;color:var(--grey-0);transition:background .15s}</p>
+<p class="p1">.home-action:active .home-action-circle{background:var(--opacity-inverted-30)}</p>
+<p class="p1">.home-action-label{font-size:13px;color:var(--grey-0);font-weight:400}</p>
+<p class="p1">.home-products-row{display:flex;gap:var(--sp-300);padding:var(--sp-400) var(--sp-500) var(--sp-200);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}</p>
+<p class="p1">.home-products-row::-webkit-scrollbar{display:none}</p>
+<p class="p1">.product-card{flex-shrink:0;width:100px;background:var(--screen-primary);border-radius:var(--r-md);border:1px solid var(--border-tertiary);padding:var(--sp-300) var(--sp-200);text-align:center;position:relative}</p>
+<p class="p1">.product-badge{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--lime-500);color:var(--grey-900);font-size:9px;font-weight:700;padding:2px 8px;border-radius:var(--r-pill);letter-spacing:.3px}</p>
+<p class="p1">.product-icon{width:32px;height:32px;margin:0 auto var(--sp-200);display:flex;align-items:center;justify-content:center;color:var(--text-primary)}</p>
+<p class="p1">.product-label{font-size:12px;color:var(--text-primary);line-height:1.3}</p>
+<p class="p1">.home-fx-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-300);padding:var(--sp-400) var(--sp-500) var(--sp-300)}</p>
+<p class="p1">.fx-card{background:var(--screen-primary);border:1px solid var(--border-tertiary);border-radius:var(--r-md);padding:var(--sp-400)}</p>
+<p class="p1">.fx-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}</p>
+<p class="p1">.fx-card-title{font-size:14px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.fx-card-subtitle{font-size:11px;color:var(--text-secondary);margin-bottom:var(--sp-300)}</p>
+<p class="p1">.fx-card-pill{background:var(--blue-50);color:var(--blue-500);font-size:10px;font-weight:700;padding:3px 8px;border-radius:var(--r-pill);display:inline-block;margin-bottom:var(--sp-200)}</p>
+<p class="p1">.fx-card-price{font-size:18px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.home-promo-card{background:linear-gradient(135deg,var(--blue-50) 0%,var(--lime-200) 100%);border-radius:var(--r-lg);padding:var(--sp-500);margin:var(--sp-200) var(--sp-500) var(--sp-500)}</p>
+<p class="p1">.promo-title{font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:6px;line-height:1.3}</p>
+<p class="p1">.promo-subtitle{font-size:13px;color:var(--text-secondary);line-height:1.4}</p>
+<p class="p1">.home-section{padding:var(--sp-500) var(--sp-500) var(--sp-200)}</p>
+<p class="p1">.home-section-title{font-size:14px;color:var(--text-primary);font-weight:500}</p>
+<p class="p1">.home-movements{padding:0 var(--sp-500)}</p>
+<p class="p1">.movement-row{display:flex;align-items:center;gap:var(--sp-300);padding:var(--sp-300) 0;border-bottom:1px solid var(--border-tertiary)}</p>
+<p class="p1">.movement-row:last-child{border-bottom:none}</p>
+<p class="p1">.movement-icon{width:40px;height:40px;border-radius:50%;background:var(--blue-50);display:flex;align-items:center;justify-content:center;color:var(--blue-500)}</p>
+<p class="p1">.movement-text{flex:1}</p>
+<p class="p1">.movement-name{font-size:14px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.movement-detail{font-size:12px;color:var(--text-secondary);margin-top:2px}</p>
+<p class="p1">.movement-amount{font-size:14px;font-weight:500;color:var(--text-success)}</p>
+<p class="p1">.movement-amount.negative{color:var(--text-primary)}</p>
+<p class="p1">/* NAVBAR */</p>
+<p class="p1">.navbar-wrap{flex-shrink:0;padding:var(--sp-300) var(--sp-400) var(--sp-400);background:transparent}</p>
+<p class="p1">.navbar{background:var(--screen-primary);border:1px solid var(--border-tertiary);border-radius:var(--r-pill);padding:var(--sp-200);display:flex;justify-content:space-around;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.06)}</p>
+<p class="p1">.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;border:none;background:transparent;padding:6px 4px;font-family:inherit;flex:1}</p>
+<p class="p1">.nav-icon-wrap{width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--icon-tertiary)}</p>
+<p class="p1">.nav-item.active .nav-icon-wrap{color:var(--icon-primary)}</p>
+<p class="p1">.nav-label{font-size:10px;color:var(--text-tertiary)}</p>
+<p class="p1">.nav-item.active .nav-label{color:var(--text-primary);font-weight:500}</p>
+<p class="p1">.nav-fab{width:44px;height:44px;background:var(--screen-primary);border:1.5px solid var(--blue-500);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--blue-500);transition:transform .15s;flex-shrink:0}</p>
+<p class="p1">.nav-fab:active{transform:scale(.94)}</p>
+<p class="p1">.scroll-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}</p>
+<p class="p1">/* TRANSFERIR */</p>
+<p class="p1">.transferir-title{padding:0 var(--sp-500) var(--sp-400);font-size:22px;font-weight:500;letter-spacing:-.3px;color:var(--text-primary)}</p>
+<p class="p1">.search-row{display:flex;align-items:center;gap:var(--sp-300);padding:0 var(--sp-500) var(--sp-400)}</p>
+<p class="p1">.search-input-inner{position:relative;flex:1}</p>
+<p class="p1">.search-input{width:100%;background:var(--surface-primary);border-radius:var(--r-md);padding:14px 42px 14px 16px;border:1px solid transparent;font-size:14px;color:var(--text-primary);font-family:inherit;height:48px}</p>
+<p class="p1">.search-input::placeholder{color:var(--text-tertiary)}</p>
+<p class="p1">.search-input:focus{outline:none;border-color:var(--surface-action-primary);background:var(--screen-primary)}</p>
+<p class="p1">.search-icon-right{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--icon-tertiary);display:flex;align-items:center;justify-content:center;pointer-events:none}</p>
+<p class="p1">.scan-btn-circle{width:48px;height:48px;flex-shrink:0;background:var(--surface-action-primary);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--icon-onaction);transition:transform .15s}</p>
+<p class="p1">.scan-btn-circle:active{transform:scale(.94)}</p>
+<p class="p1">.contacts-section-title{padding:var(--sp-400) var(--sp-500) var(--sp-300);font-size:14px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.filter-pills{display:flex;gap:var(--sp-200);padding:0 var(--sp-500) var(--sp-400);overflow-x:auto;scrollbar-width:none}</p>
+<p class="p1">.filter-pills::-webkit-scrollbar{display:none}</p>
+<p class="p1">.filter-pill{padding:var(--sp-200) var(--sp-400);background:var(--surface-primary);border-radius:var(--r-pill);font-size:13px;color:var(--text-primary);border:none;cursor:pointer;font-family:inherit;white-space:nowrap;font-weight:400;display:flex;align-items:center;gap:6px}</p>
+<p class="p1">.filter-pill.active{background:var(--text-primary);color:var(--text-inverted);font-weight:500}</p>
+<p class="p1">.contact-row{display:flex;align-items:center;gap:var(--sp-300);padding:var(--sp-300) var(--sp-500);cursor:pointer}</p>
+<p class="p1">.contact-row:active{background:var(--surface-primary)}</p>
+<p class="p1">.contact-avatar{width:44px;height:44px;border-radius:50%;background:var(--screen-primary);border:1px solid var(--border-secondary);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}</p>
+<p class="p1">.contact-info{flex:1;min-width:0}</p>
+<p class="p1">.contact-name{font-size:15px;font-weight:500;color:var(--text-primary);line-height:1.3}</p>
+<p class="p1">.contact-sublabel{font-size:13px;color:var(--text-secondary);margin-top:1px}</p>
+<p class="p1">.contact-banks{display:flex;margin-top:4px}</p>
+<p class="p1">.bank-chip{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--screen-primary);margin-left:-4px;flex-shrink:0}</p>
+<p class="p1">.bank-chip:first-child{margin-left:0}</p>
+<p class="p1">.bank-chip.mp{background:#FFE600}</p>
+<p class="p1">.bank-chip.bbva{background:#004481}</p>
+<p class="p1">.bank-chip.galicia{background:#FF6B00}</p>
+<p class="p1">.bank-chip.santander{background:#EC0000}</p>
+<p class="p1">.bank-chip.uala{background:var(--blue-500)}</p>
+<p class="p1">.bank-chip.brubank{background:#7B1FA2}</p>
+<p class="p1">.bank-chip.naranja{background:#FF6900}</p>
+<p class="p1">.bank-chip.more{background:var(--grey-200);color:var(--text-secondary);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center}</p>
+<p class="p1">.contact-tag{background:var(--light-blue-100);color:var(--light-blue-700);font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--r-pill);flex-shrink:0}</p>
+<p class="p1">.contact-actions{display:flex;align-items:center;gap:var(--sp-300);flex-shrink:0}</p>
+<p class="p1">.contact-action{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--icon-tertiary);background:transparent;border:none;cursor:pointer}</p>
+<p class="p1">.contact-action.heart-filled{color:var(--text-primary)}</p>
+<p class="p1">/* COACHMARK */</p>
+<p class="p1">.coachmark-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--surface-overlay);z-index:100;display:none}</p>
+<p class="p1">.coachmark-overlay.active{display:block}</p>
+<p class="p1">.coachmark-tooltip{position:absolute;background:var(--screen-primary);border-radius:var(--r-lg);padding:var(--sp-500);z-index:101;box-shadow:0 10px 30px rgba(0,0,0,.25)}</p>
+<p class="p1">.coachmark-arrow-up{position:absolute;top:-8px;width:16px;height:14px;overflow:hidden}</p>
+<p class="p1">.coachmark-arrow-up::after{content:'';position:absolute;top:4px;left:0;width:14px;height:14px;background:var(--screen-primary);transform:rotate(45deg)}</p>
+<p class="p1">.coachmark-badge{display:inline-block;padding:4px 10px;background:var(--lime-500);color:var(--grey-900);font-size:10px;font-weight:700;border-radius:var(--r-pill);margin-bottom:10px;letter-spacing:.3px}</p>
+<p class="p1">.coachmark-title{font-size:16px;font-weight:500;margin-bottom:6px;color:var(--text-primary);letter-spacing:-.2px}</p>
+<p class="p1">.coachmark-text{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:var(--sp-400)}</p>
+<p class="p1">.coachmark-actions{display:flex;gap:var(--sp-200)}</p>
+<p class="p1">.coachmark-actions button{flex:1;padding:12px;border-radius:var(--r-md);font-size:13px;cursor:pointer;font-family:inherit;border:none;font-weight:500}</p>
+<p class="p1">.coachmark-skip{background:transparent;color:var(--text-secondary);border:1px solid var(--border-secondary)!important}</p>
+<p class="p1">.coachmark-try{background:var(--surface-action-primary);color:var(--text-onaction-primary)}</p>
+<p class="p1">/* SCANNER */</p>
+<p class="p1">.scanner-screen{background:var(--grey-950);color:var(--grey-0)}</p>
+<p class="p1">.scanner-controls-top{padding:0 var(--sp-500);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}</p>
+<p class="p1">.scan-control-btn{width:40px;height:40px;background:var(--opacity-inverted-20);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--grey-0);transition:background .15s}</p>
+<p class="p1">.scan-control-btn:active{background:var(--opacity-inverted-30)}</p>
+<p class="p1">.scan-control-btn.active{background:var(--surface-action-primary)}</p>
+<p class="p1">.scanner-controls-right{display:flex;gap:var(--sp-200)}</p>
+<p class="p1">.camera-area{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background-color:var(--grey-950);overflow:hidden}</p>
+<p class="p1">.fake-receipt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-3deg);background:#faf5e6;padding:18px 22px;border-radius:4px;box-shadow:0 8px 16px rgba(0,0,0,.3);width:78%;max-width:280px;font-family:'Courier New',monospace;color:#2a2a2a;text-align:center;line-height:1.5}</p>
+<p class="p1">.fake-receipt .header-text{font-size:12px;font-weight:bold;margin-bottom:8px;text-transform:uppercase}</p>
+<p class="p1">.fake-receipt .alias-line{font-size:14px;font-weight:bold;margin:4px 0}</p>
+<p class="p1">.fake-receipt .meta{font-size:9px;color:#555;margin-top:6px;word-break:break-all}</p>
+<p class="p1">.reticle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78%;aspect-ratio:16/9;pointer-events:none}</p>
+<p class="p1">.reticle .corner{position:absolute;width:28px;height:28px;border-color:var(--grey-0);border-style:solid;transition:border-color .3s}</p>
+<p class="p1">.reticle .corner.tl{top:0;left:0;border-width:3px 0 0 3px;border-top-left-radius:6px}</p>
+<p class="p1">.reticle .corner.tr{top:0;right:0;border-width:3px 3px 0 0;border-top-right-radius:6px}</p>
+<p class="p1">.reticle .corner.bl{bottom:0;left:0;border-width:0 0 3px 3px;border-bottom-left-radius:6px}</p>
+<p class="p1">.reticle .corner.br{bottom:0;right:0;border-width:0 3px 3px 0;border-bottom-right-radius:6px}</p>
+<p class="p1">.reticle.detecting .corner{border-color:var(--lime-500)}</p>
+<p class="p1">.reticle.error .corner{border-color:var(--red-300)}</p>
+<p class="p1">.scan-hint{position:absolute;top:calc(50% + 110px);left:50%;transform:translateX(-50%);padding:10px 18px;background:var(--opacity-default-70);color:var(--grey-0);font-size:13px;border-radius:var(--r-pill);white-space:nowrap;z-index:5;font-weight:400}</p>
+<p class="p1">.scan-hint.detecting{background:var(--lime-500);color:var(--grey-900);font-weight:500;display:flex;align-items:center;gap:8px}</p>
+<p class="p1">.scan-hint.error{background:var(--red-500);text-align:center;flex-direction:column;padding:12px 16px;line-height:1.3;align-items:flex-start;white-space:normal}</p>
+<p class="p1">.scan-hint .err-title{font-weight:500;font-size:13px;color:var(--grey-0)}</p>
+<p class="p1">.scan-hint .err-sub{font-size:11px;color:var(--grey-0);opacity:.9;margin-top:2px}</p>
+<p class="p1">.write-manual-btn{position:absolute;bottom:100px;left:var(--sp-400);right:var(--sp-400);padding:14px;background:var(--opacity-inverted-20);color:var(--grey-0);border:1px solid var(--opacity-inverted-30);border-radius:var(--r-md);font-size:13px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:var(--sp-200);z-index:5;font-weight:500}</p>
+<p class="p1">.scanner-tabs{flex-shrink:0;padding:var(--sp-400) var(--sp-400) var(--sp-500);background:linear-gradient(to top,rgba(0,0,0,.7),transparent)}</p>
+<p class="p1">.segmented-control{background:var(--grey-1000);border-radius:var(--r-pill);padding:4px;display:flex}</p>
+<p class="p1">.scanner-tab{flex:1;padding:12px 8px;background:transparent;color:var(--grey-0);border:none;border-radius:var(--r-pill);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s}</p>
+<p class="p1">.scanner-tab.active{background:var(--blue-500);color:var(--grey-0)}</p>
+<p class="p1">/* BOTTOM SHEET */</p>
+<p class="p1">.bottom-sheet-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--surface-overlay);z-index:50;display:none;opacity:0;transition:opacity .3s}</p>
+<p class="p1">.bottom-sheet-overlay.active{display:block;opacity:1}</p>
+<p class="p1">.bottom-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--screen-primary);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:12px var(--sp-600) var(--sp-800);transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:51}</p>
+<p class="p1">.bottom-sheet.active{transform:translateY(0)}</p>
+<p class="p1">.sheet-handle{width:36px;height:4px;background:var(--border-secondary);border-radius:2px;margin:0 auto var(--sp-400)}</p>
+<p class="p1">.sheet-status{display:flex;align-items:center;gap:var(--sp-200);margin-bottom:var(--sp-400)}</p>
+<p class="p1">.sheet-status-icon{width:26px;height:26px;border-radius:50%;background:var(--green-300);display:flex;align-items:center;justify-content:center}</p>
+<p class="p1">.sheet-status-text{font-size:13px;color:var(--text-success);font-weight:500}</p>
+<p class="p1">.sheet-label{font-size:13px;color:var(--text-secondary);margin-bottom:6px}</p>
+<p class="p1">.sheet-name{font-size:22px;font-weight:500;margin-bottom:4px;color:var(--text-primary);letter-spacing:-.2px}</p>
+<p class="p1">.sheet-detail{font-size:13px;color:var(--text-secondary);margin-bottom:var(--sp-600)}</p>
+<p class="p1">.sheet-actions{display:flex;flex-direction:column;gap:var(--sp-300)}</p>
+<p class="p1">/* CONFIRMAR */</p>
+<p class="p1">.confirm-card{margin:0 var(--sp-500) var(--sp-400);background:var(--surface-primary);border-radius:var(--r-lg);padding:var(--sp-500)}</p>
+<p class="p1">.confirm-row{display:flex;align-items:center;gap:var(--sp-400)}</p>
+<p class="p1">.confirm-avatar{width:52px;height:52px;border-radius:50%;background:var(--surface-action-primary);color:var(--text-onaction-primary);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:500}</p>
+<p class="p1">.confirm-name{font-size:17px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.confirm-cuit{font-size:12px;color:var(--text-secondary);margin-top:3px}</p>
+<p class="p1">.field-list{margin:0 var(--sp-500) var(--sp-500)}</p>
+<p class="p1">.field-item{background:var(--surface-primary);border-radius:var(--r-md);padding:var(--sp-300) var(--sp-400);margin-bottom:var(--sp-200)}</p>
+<p class="p1">.field-label{font-size:11px;color:var(--text-secondary);margin-bottom:4px}</p>
+<p class="p1">.field-value{font-size:14px;color:var(--text-primary);word-break:break-all}</p>
+<p class="p1">.save-contact-row{margin:0 var(--sp-500) var(--sp-400);padding:var(--sp-400);background:var(--surface-primary);border-radius:var(--r-md);display:flex;align-items:center;justify-content:space-between;cursor:pointer}</p>
+<p class="p1">.save-contact-row .label{font-size:14px;color:var(--text-primary)}</p>
+<p class="p1">.toggle{width:40px;height:24px;background:var(--grey-300);border-radius:var(--r-pill);position:relative;transition:background .2s;flex-shrink:0}</p>
+<p class="p1">.toggle.active{background:var(--surface-action-primary)}</p>
+<p class="p1">.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:var(--grey-0);border-radius:50%;transition:transform .2s}</p>
+<p class="p1">.toggle.active::after{transform:translateX(16px)}</p>
+<p class="p1">.footer-cta{flex-shrink:0;padding:var(--sp-400) var(--sp-500) var(--sp-500);background:var(--screen-primary);border-top:1px solid var(--border-tertiary)}</p>
+<p class="p1">/* MONTO */</p>
+<p class="p1">.amount-screen{background:var(--screen-primary)}</p>
+<p class="p1">.amount-display{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 var(--sp-500)}</p>
+<p class="p1">.amount-recipient{text-align:center;margin-bottom:var(--sp-600)}</p>
+<p class="p1">.amount-recipient-label{font-size:13px;color:var(--text-secondary);margin-bottom:6px}</p>
+<p class="p1">.amount-recipient-name{font-size:16px;font-weight:500;color:var(--text-primary)}</p>
+<p class="p1">.amount-recipient-bank{font-size:13px;color:var(--text-secondary);margin-top:2px}</p>
+<p class="p1">.amount-input-wrap{text-align:center;margin:var(--sp-500) 0 var(--sp-400)}</p>
+<p class="p1">.amount-currency{font-size:36px;color:var(--text-tertiary);margin-right:4px;font-weight:300}</p>
+<p class="p1">.amount-value{font-size:48px;font-weight:500;color:var(--text-primary);display:inline-block;min-width:60px;letter-spacing:-1px}</p>
+<p class="p1">.amount-balance{text-align:center;font-size:12px;color:var(--text-secondary);padding-top:var(--sp-400);border-top:1px solid var(--border-tertiary);max-width:240px;margin:0 auto}</p>
+<p class="p1">.reason-row{margin:0 var(--sp-500) var(--sp-400);padding:var(--sp-400);background:var(--surface-primary);border-radius:var(--r-md);cursor:pointer}</p>
+<p class="p1">.reason-label{font-size:11px;color:var(--text-secondary);margin-bottom:3px}</p>
+<p class="p1">.reason-value{font-size:14px;color:var(--text-tertiary)}</p>
+<p class="p1">.reason-value.filled{color:var(--text-primary)}</p>
+<p class="p1">.num-keypad{flex-shrink:0;background:var(--grey-100);padding:var(--sp-200);display:grid;grid-template-columns:repeat(3,1fr);gap:6px}</p>
+<p class="p1">.num-key{aspect-ratio:2.2;background:var(--screen-primary);border:none;border-radius:var(--r-sm);font-size:24px;font-weight:400;cursor:pointer;color:var(--text-primary);box-shadow:0 1px 0 rgba(0,0,0,.1);font-family:inherit}</p>
+<p class="p1">.num-key:active{background:var(--grey-200)}</p>
+<p class="p1">.num-key.gray{background:transparent;box-shadow:none}</p>
+<p class="p1">/* REVISAR */</p>
+<p class="p1">.review-summary{text-align:center;padding:var(--sp-800) var(--sp-500) var(--sp-600);background:var(--surface-primary);margin:0 var(--sp-500) var(--sp-500);border-radius:var(--r-lg)}</p>
+<p class="p1">.review-label{font-size:13px;color:var(--text-secondary);margin-bottom:var(--sp-300)}</p>
+<p class="p1">.review-amount{font-size:36px;font-weight:500;color:var(--text-primary);letter-spacing:-.5px}</p>
+<p class="p1">.review-list{margin:0 var(--sp-500)}</p>
+<p class="p1">.review-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-400) 0;border-bottom:1px solid var(--border-tertiary);font-size:14px}</p>
+<p class="p1">.review-row:last-child{border-bottom:none}</p>
+<p class="p1">.review-row-label{color:var(--text-secondary)}</p>
+<p class="p1">.review-row-value{color:var(--text-primary);font-weight:500;text-align:right;max-width:60%}</p>
+<p class="p1">/* PROCESANDO */</p>
+<p class="p1">.processing-screen{align-items:center;justify-content:center;text-align:center}</p>
+<p class="p1">.processing-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 30px}</p>
+<p class="p1">.spinner{width:56px;height:56px;border:3px solid var(--border-tertiary);border-top-color:var(--surface-action-primary);border-radius:50%;animation:spin .9s linear infinite;margin-bottom:var(--sp-500)}</p>
+<p class="p1">@keyframes spin{to{transform:rotate(360deg)}}</p>
+<p class="p1">.processing-title{font-size:17px;font-weight:500;margin-bottom:6px;color:var(--text-primary)}</p>
+<p class="p1">.processing-subtitle{font-size:13px;color:var(--text-secondary)}</p>
+<p class="p1">/* ÉXITO */</p>
+<p class="p1">.success-screen{background:var(--screen-primary)}</p>
+<p class="p1">.success-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 30px;text-align:center}</p>
+<p class="p1">.success-icon{width:88px;height:88px;background:var(--green-300);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:var(--sp-600);color:var(--green-700)}</p>
+<p class="p1">.success-label{font-size:13px;color:var(--text-secondary);margin-bottom:8px}</p>
+<p class="p1">.success-amount{font-size:36px;font-weight:500;margin-bottom:6px;color:var(--text-primary);letter-spacing:-.5px}</p>
+<p class="p1">.success-recipient{font-size:14px;color:var(--text-secondary)}</p>
+<p class="p1">.success-actions{flex-shrink:0;padding:var(--sp-400) var(--sp-500) var(--sp-600);background:var(--screen-primary);display:flex;flex-direction:column;gap:var(--sp-300)}</p>
+<p class="p1">.save-contact-success{background:var(--surface-primary);border-radius:var(--r-md);padding:var(--sp-400);display:flex;align-items:center;justify-content:center;gap:var(--sp-200);font-size:13px;cursor:pointer;border:none;font-family:inherit;color:var(--text-primary);margin-bottom:4px;font-weight:500}</p>
+<p class="p1">.success-actions-row{display:flex;gap:var(--sp-300)}</p>
+<p class="p1">.success-actions-row button{flex:1}</p>
+<p class="p1">/* PROTO CONTROLS */</p>
+<p class="p1">.proto-controls{position:fixed;bottom:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:8px;align-items:flex-end}</p>
+<p class="p1">.proto-toggle{width:44px;height:44px;border-radius:50%;background:var(--grey-950);color:var(--grey-0);border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:18px}</p>
+<p class="p1">.proto-panel{background:var(--screen-primary);border-radius:var(--r-lg);padding:var(--sp-400);box-shadow:0 10px 30px rgba(0,0,0,.3);width:240px;display:none}</p>
+<p class="p1">.proto-panel.active{display:block}</p>
+<p class="p1">.proto-panel h3{font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:var(--sp-300)}</p>
+<p class="p1">.proto-panel button{width:100%;padding:10px 12px;background:var(--surface-primary);border:none;border-radius:var(--r-sm);text-align:left;font-size:12px;cursor:pointer;margin-bottom:4px;font-family:inherit;color:var(--text-primary)}</p>
+<p class="p1">.proto-panel button:hover{background:var(--grey-100)}</p>
+<p class="p1">.proto-panel hr{border:none;border-top:1px solid var(--border-tertiary);margin:var(--sp-300) 0}</p>
+<p class="p1">.proto-info{font-size:10px;color:var(--text-secondary);line-height:1.5;margin-top:8px}</p>
+<p class="p1">.proto-tokens-info{background:var(--lime-200);color:var(--grey-900);padding:8px 10px;border-radius:var(--r-sm);font-size:10px;margin-bottom:10px;line-height:1.4}</p>
+<p class="p1">@media(max-width:500px){.proto-panel{width:calc(100vw - 32px);right:0;max-width:260px}}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="device-frame" id="device"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- HOME --&gt;</p>
+<p class="p1">&lt;div class="screen home-screen active" id="screen-home"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="home-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="status-bar home-status-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="status-time"&gt;9:41&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-top-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="home-user"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-user-avatar"&gt;PG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-user-name"&gt;Hola Patricia&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="home-top-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M10.268 21a2 2 0 0 0 3.464 0"/&gt;&lt;path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="notification-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/&gt;&lt;path d="M12 17h.01"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-balance-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="home-balance-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="home-balance-label"&gt;Caja de Ahorro en&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="currency-toggle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="currency-toggle-item active"&gt;🇦🇷 ARS&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="currency-toggle-item"&gt;🇺🇸&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="home-balance-amount"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="home-balance-currency"&gt;$&lt;/span&gt;&lt;span class="home-balance-integer"&gt;10.000&lt;/span&gt;&lt;span class="home-balance-decimal"&gt;,0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="home-balance-eye"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/&gt;&lt;circle cx="12" cy="12" r="3"/&gt;&lt;/svg&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-message"&gt;Tu plata está creciendo&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-tasa-pill"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="tasa-badge"&gt;🔥 30%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="tasa-text"&gt;Tu plata está creciendo&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-quick-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="home-action" onclick="navigateTo('screen-transferir',false)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-circle"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M5 12h14"/&gt;&lt;path d="M12 5v14"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-label"&gt;Depositar&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="home-action" onclick="navigateTo('screen-transferir',true)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-circle"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M5 12h14"/&gt;&lt;path d="m12 5 7 7-7 7"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-label"&gt;Transferir&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="home-action"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-circle"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M7 7h10v10"/&gt;&lt;path d="M7 17 17 7"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-label"&gt;Retirar&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="home-action"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-circle"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/&gt;&lt;path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="home-action-label"&gt;Tu cuenta&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scroll-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-products-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="product-card"&gt;&lt;div class="product-badge"&gt;NUEVO&lt;/div&gt;&lt;div class="product-icon"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/&gt;&lt;path d="m9 12 2 2 4-4"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="product-label"&gt;Seguros&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="product-card"&gt;&lt;div class="product-icon"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/&gt;&lt;path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/&gt;&lt;path d="m2 16 6 6"/&gt;&lt;circle cx="16" cy="9" r="2.9"/&gt;&lt;circle cx="6" cy="5" r="3"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="product-label"&gt;Préstamos&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="product-card"&gt;&lt;div class="product-icon"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M16 7h6v6"/&gt;&lt;path d="m22 7-8.5 8.5-5-5L2 17"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="product-label"&gt;Inversiones&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="product-card"&gt;&lt;div class="product-icon"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/&gt;&lt;path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/&gt;&lt;path d="M12 17.5v-11"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="product-label"&gt;Pagar servicio&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="product-card"&gt;&lt;div class="product-icon"&gt;&lt;svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="14" height="20" x="5" y="2" rx="2" ry="2"/&gt;&lt;path d="M12 18h.01"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="product-label"&gt;Recargas&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-fx-cards"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="fx-card"&gt;&lt;div class="fx-card-header"&gt;&lt;div class="fx-card-title"&gt;Dólar Oficial&lt;/div&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="color:var(--text-tertiary)"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="fx-card-subtitle"&gt;Cotización final&lt;/div&gt;&lt;div class="fx-card-pill"&gt;COMPRA&lt;/div&gt;&lt;div class="fx-card-price"&gt;$ 1.400,00&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="fx-card"&gt;&lt;div class="fx-card-header"&gt;&lt;div class="fx-card-title"&gt;Dólar MEP&lt;/div&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="color:var(--text-tertiary)"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="fx-card-subtitle"&gt;Cotización final&lt;/div&gt;&lt;div class="fx-card-pill"&gt;COMPRA&lt;/div&gt;&lt;div class="fx-card-price"&gt;$ 1.510,60&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-promo-card"&gt;&lt;div class="promo-title"&gt;Aumentá tu tasa hasta 45% en septiembre&lt;/div&gt;&lt;div class="promo-subtitle"&gt;Más usás Ualá, más sube tu Tasa Plus 🔥&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-section"&gt;&lt;div class="home-section-title"&gt;Movimientos&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="home-movements" style="padding-bottom:20px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="movement-row"&gt;&lt;div class="movement-icon"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M17 7 7 17"/&gt;&lt;path d="M17 17H7V7"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="movement-text"&gt;&lt;div class="movement-name"&gt;Estefanía Gutiérrez&lt;/div&gt;&lt;div class="movement-detail"&gt;Transferencia recibida · 08/05&lt;/div&gt;&lt;/div&gt;&lt;div class="movement-amount"&gt;+$2.500&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="movement-row"&gt;&lt;div class="movement-icon" style="background:var(--surface-primary);color:var(--text-secondary)"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="20" height="14" x="2" y="5" rx="2"/&gt;&lt;line x1="2" x2="22" y1="10" y2="10"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="movement-text"&gt;&lt;div class="movement-name"&gt;Carrefour Cap. Federal&lt;/div&gt;&lt;div class="movement-detail"&gt;Compra con tarjeta · 07/05&lt;/div&gt;&lt;/div&gt;&lt;div class="movement-amount negative"&gt;-$8.450&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="movement-row"&gt;&lt;div class="movement-icon" style="background:var(--surface-primary);color:var(--text-secondary)"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M7 7h10v10"/&gt;&lt;path d="M7 17 17 7"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="movement-text"&gt;&lt;div class="movement-name"&gt;María González&lt;/div&gt;&lt;div class="movement-detail"&gt;Transferencia enviada · 03/05&lt;/div&gt;&lt;/div&gt;&lt;div class="movement-amount negative"&gt;-$1.200&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="navbar-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="navbar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item active"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/&gt;&lt;path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Home&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item" onclick="navigateTo('screen-transferir',true)"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M5 12h14"/&gt;&lt;path d="m12 5 7 7-7 7"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Transferir&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-fab" onclick="openScannerFromFAB()"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="5" height="5" x="3" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="16" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="3" y="16" rx="1"/&gt;&lt;path d="M21 16h-3a2 2 0 0 0-2 2v3"/&gt;&lt;path d="M21 21v.01"/&gt;&lt;path d="M12 7v3a2 2 0 0 1-2 2H7"/&gt;&lt;path d="M3 12h.01"/&gt;&lt;path d="M12 3h.01"/&gt;&lt;path d="M12 16v.01"/&gt;&lt;path d="M16 12h1"/&gt;&lt;path d="M21 12v.01"/&gt;&lt;path d="M12 21v-1"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/&gt;&lt;path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/&gt;&lt;path d="M12 17.5v-11"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Servicios&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="7" height="7" x="3" y="3" rx="1"/&gt;&lt;rect width="7" height="7" x="14" y="3" rx="1"/&gt;&lt;rect width="7" height="7" x="14" y="14" rx="1"/&gt;&lt;rect width="7" height="7" x="3" y="14" rx="1"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Más&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- TRANSFERIR --&gt;</p>
+<p class="p1">&lt;div class="screen" id="screen-transferir"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header" style="justify-content:space-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="display:flex;align-items:center;gap:14px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="header-back" onclick="navigateTo('screen-home',true)"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m15 18-6-6 6-6"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="header-title"&gt;Transferir&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button style="width:36px;height:36px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;color:var(--icon-primary);cursor:pointer"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scroll-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="transferir-title"&gt;¿A quién le querés transferir?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="search-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="search-input-inner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" class="search-input" id="transfer-search" placeholder="Alias, CBU, CVU o contacto" readonly&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="search-icon-right"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="8"/&gt;&lt;path d="m21 21-4.3-4.3"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scan-btn-circle" id="scan-btn-input" onclick="openScannerFromTransferir()"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M3 7V5a2 2 0 0 1 2-2h2"/&gt;&lt;path d="M17 3h2a2 2 0 0 1 2 2v2"/&gt;&lt;path d="M21 17v2a2 2 0 0 1-2 2h-2"/&gt;&lt;path d="M7 21H5a2 2 0 0 1-2-2v-2"/&gt;&lt;path d="M7 12h10"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contacts-section-title"&gt;Mis contactos&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="filter-pills"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="filter-pill active"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M20 6 9 17l-5-5"/&gt;&lt;/svg&gt;Todos&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="filter-pill"&gt;En pesos&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="filter-pill"&gt;En dólares&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="filter-pill"&gt;Favoritos&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;RA&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-name"&gt;Regina Amat&lt;/div&gt;&lt;div class="contact-banks"&gt;&lt;div class="bank-chip naranja"&gt;&lt;/div&gt;&lt;div class="bank-chip bbva"&gt;&lt;/div&gt;&lt;div class="bank-chip mp"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;span class="contact-tag"&gt;Mis cuentas&lt;/span&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;JN&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-name"&gt;Julieta Nápoli&lt;/div&gt;&lt;div class="contact-banks"&gt;&lt;div class="bank-chip mp"&gt;&lt;/div&gt;&lt;div class="bank-chip santander"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;button class="contact-action heart-filled"&gt;&lt;svg width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;FG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-name"&gt;Franco González&lt;/div&gt;&lt;div class="contact-banks"&gt;&lt;div class="bank-chip galicia"&gt;&lt;/div&gt;&lt;div class="bank-chip uala"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;LR&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-name"&gt;Leandro Ramírez&lt;/div&gt;&lt;div class="contact-banks"&gt;&lt;div class="bank-chip mp"&gt;&lt;/div&gt;&lt;div class="bank-chip brubank"&gt;&lt;/div&gt;&lt;div class="bank-chip bbva"&gt;&lt;/div&gt;&lt;div class="bank-chip more"&gt;+1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;NL&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-sublabel" style="font-size:12px"&gt;Norma López&lt;/div&gt;&lt;div class="contact-name"&gt;Mamá&lt;/div&gt;&lt;div class="contact-banks"&gt;&lt;div class="bank-chip galicia"&gt;&lt;/div&gt;&lt;div class="bank-chip uala"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;button class="contact-action heart-filled"&gt;&lt;svg width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="contact-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-avatar"&gt;JM&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-info"&gt;&lt;div class="contact-name"&gt;Julia Martínez&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-actions"&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;button class="contact-action"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="5" r="1"/&gt;&lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="12" cy="19" r="1"/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="navbar-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="navbar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item" onclick="navigateTo('screen-home',true)"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/&gt;&lt;path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Inicio&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item active"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M5 12h14"/&gt;&lt;path d="m12 5 7 7-7 7"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Transferir&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-fab" onclick="openScannerFromFAB()"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="5" height="5" x="3" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="16" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="3" y="16" rx="1"/&gt;&lt;path d="M21 16h-3a2 2 0 0 0-2 2v3"/&gt;&lt;path d="M21 21v.01"/&gt;&lt;path d="M12 7v3a2 2 0 0 1-2 2H7"/&gt;&lt;path d="M3 12h.01"/&gt;&lt;path d="M12 3h.01"/&gt;&lt;path d="M12 16v.01"/&gt;&lt;path d="M16 12h1"/&gt;&lt;path d="M21 12v.01"/&gt;&lt;path d="M12 21v-1"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/&gt;&lt;path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/&gt;&lt;path d="M12 17.5v-11"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Servicios&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item"&gt;&lt;div class="nav-icon-wrap"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="7" height="7" x="3" y="3" rx="1"/&gt;&lt;rect width="7" height="7" x="14" y="3" rx="1"/&gt;&lt;rect width="7" height="7" x="14" y="14" rx="1"/&gt;&lt;rect width="7" height="7" x="3" y="14" rx="1"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="nav-label"&gt;Más&lt;/div&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Coachmark --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="coachmark-overlay" id="coachmark"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="coachmark-tooltip" id="coachmark-tooltip" style="top:200px;left:18px;right:18px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coachmark-arrow-up" id="coachmark-arrow" style="right:30px"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coachmark-badge"&gt;NUEVO&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coachmark-title"&gt;Escaneá Alias, CBU o CVU&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coachmark-text"&gt;Apuntá tu cámara al dato y transferí sin tipear ni copiar.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="coachmark-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="coachmark-skip" onclick="dismissCoachmark()"&gt;Ahora no&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="coachmark-try" onclick="tryFeatureFromCoachmark()"&gt;Probar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- SCANNER --&gt;</p>
+<p class="p1">&lt;div class="screen scanner-screen" id="screen-scanner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar dark"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scanner-controls-top" style="padding-bottom:12px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="scan-control-btn" onclick="closeScanner()"&gt;&lt;svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M18 6 6 18"/&gt;&lt;path d="m6 6 12 12"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="scanner-controls-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scan-control-btn" id="flash-btn" onclick="toggleFlash()"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"/&gt;&lt;path d="M6 6h12"/&gt;&lt;path d="M12 12v3"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scan-control-btn"&gt;&lt;svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="18" height="18" x="3" y="3" rx="2" ry="2"/&gt;&lt;circle cx="9" cy="9" r="2"/&gt;&lt;path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="camera-area"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;video id="camera-video" autoplay playsinline muted style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:none"&gt;&lt;/video&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="qr-canvas" style="display:none"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="camera-permission-msg" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:white;padding:20px;border-radius:12px;text-align:center;width:80%;font-size:13px;line-height:1.5;z-index:10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-size:32px;margin-bottom:10px"&gt;📷&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-weight:600;margin-bottom:6px"&gt;Necesitamos acceso a tu cámara&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="opacity:.85"&gt;Permití el acceso para escanear QR. Si lo rechazaste, podés activarlo desde la configuración del navegador.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="ocr-loading-msg" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:white;padding:20px 24px;border-radius:12px;text-align:center;width:80%;font-size:13px;line-height:1.5;z-index:10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 12px"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-weight:600;margin-bottom:4px"&gt;Cargando lector de texto&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="opacity:.85;font-size:12px" id="ocr-loading-progress"&gt;Inicializando...&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fake-receipt" id="fake-receipt" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="header-text"&gt;Verdulería La Esquina&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="alias-line"&gt;maria.huerta.mp&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="meta"&gt;CBU: 0000003100098765432109&lt;br&gt;Alias: maria.huerta.mp&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="reticle" id="reticle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="corner tl"&gt;&lt;/div&gt;&lt;div class="corner tr"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="corner bl"&gt;&lt;/div&gt;&lt;div class="corner br"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="scan-hint" id="scan-hint"&gt;Apuntá al Alias, CBU o CVU&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="write-manual-btn" id="write-manual-btn" style="display:none" onclick="goToManualInput()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/&gt;&lt;path d="m15 5 4 4"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>Escribir manualmente</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scanner-tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="segmented-control"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scanner-tab" id="tab-texto" onclick="switchTab('texto')"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/&gt;&lt;path d="M9 20h6"/&gt;&lt;path d="M12 4v16"/&gt;&lt;/svg&gt;Texto&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scanner-tab" id="tab-qr" onclick="switchTab('qr')"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;rect width="5" height="5" x="3" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="16" y="3" rx="1"/&gt;&lt;rect width="5" height="5" x="3" y="16" rx="1"/&gt;&lt;path d="M21 16h-3a2 2 0 0 0-2 2v3"/&gt;&lt;path d="M21 21v.01"/&gt;&lt;path d="M12 7v3a2 2 0 0 1-2 2H7"/&gt;&lt;path d="M3 12h.01"/&gt;&lt;path d="M12 3h.01"/&gt;&lt;path d="M12 16v.01"/&gt;&lt;path d="M16 12h1"/&gt;&lt;path d="M21 12v.01"/&gt;&lt;path d="M12 21v-1"/&gt;&lt;/svg&gt;QR&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="scanner-tab" id="tab-barras" onclick="switchTab('barras')"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M3 5v14"/&gt;&lt;path d="M8 5v14"/&gt;&lt;path d="M12 5v14"/&gt;&lt;path d="M17 5v14"/&gt;&lt;path d="M21 5v14"/&gt;&lt;/svg&gt;Barras&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="bottom-sheet-overlay" id="sheet-overlay" onclick="closeSheet()"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="bottom-sheet" id="sheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-handle"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-status"&gt;&lt;div class="sheet-status-icon"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="color:var(--green-700)"&gt;&lt;path d="M20 6 9 17l-5-5"/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class="sheet-status-text"&gt;Alias detectado&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-label"&gt;Le vas a transferir a&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-name"&gt;María González&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-detail"&gt;maria.huerta.mp · Banco Galicia&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sheet-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn-primary" onclick="continueFromSheet()"&gt;Continuar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn-secondary" onclick="resetScanner()"&gt;Escanear de nuevo&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- CONFIRMAR --&gt;</p>
+<p class="p1">&lt;div class="screen" id="screen-confirm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-back" onclick="navigateTo('screen-transferir',true)"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m12 19-7-7 7-7"/&gt;&lt;path d="M19 12H5"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-title"&gt;Confirmá la cuenta&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scroll-content" style="padding-top:8px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="confirm-card"&gt;&lt;div class="confirm-row"&gt;&lt;div class="confirm-avatar"&gt;MG&lt;/div&gt;&lt;div&gt;&lt;div class="confirm-name"&gt;María González&lt;/div&gt;&lt;div class="confirm-cuit"&gt;CUIT 27-35421234-5&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="field-item"&gt;&lt;div class="field-label"&gt;Alias&lt;/div&gt;&lt;div class="field-value"&gt;maria.huerta.mp&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="field-item"&gt;&lt;div class="field-label"&gt;CBU&lt;/div&gt;&lt;div class="field-value"&gt;0000003100098765432109&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="field-item"&gt;&lt;div class="field-label"&gt;Banco&lt;/div&gt;&lt;div class="field-value"&gt;Banco Galicia&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="field-item"&gt;&lt;div class="field-label"&gt;Moneda&lt;/div&gt;&lt;div class="field-value"&gt;ARS&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="save-contact-row" onclick="toggleSaveContact()"&gt;&lt;div class="label"&gt;Guardar en mis contactos&lt;/div&gt;&lt;div class="toggle" id="save-toggle"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer-cta"&gt;&lt;button class="btn-primary" onclick="navigateTo('screen-amount',false)"&gt;Continuar&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- MONTO --&gt;</p>
+<p class="p1">&lt;div class="screen amount-screen" id="screen-amount"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-back" onclick="navigateTo('screen-confirm',true)"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m12 19-7-7 7-7"/&gt;&lt;path d="M19 12H5"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-title"&gt;Ingresá el monto&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="amount-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="amount-recipient"&gt;&lt;div class="amount-recipient-label"&gt;Le transferís a&lt;/div&gt;&lt;div class="amount-recipient-name"&gt;María González&lt;/div&gt;&lt;div class="amount-recipient-bank"&gt;Banco Galicia&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="amount-input-wrap"&gt;&lt;span class="amount-currency"&gt;$&lt;/span&gt;&lt;span class="amount-value" id="amount-value"&gt;0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="amount-balance"&gt;Disponible en Caja de ahorro: $ 45.230,50&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="reason-row"&gt;&lt;div class="reason-label"&gt;Motivo (opcional)&lt;/div&gt;&lt;div class="reason-value" id="reason-value"&gt;Varios&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="num-keypad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="num-key" onclick="appendDigit('1')"&gt;1&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('2')"&gt;2&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('3')"&gt;3&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="num-key" onclick="appendDigit('4')"&gt;4&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('5')"&gt;5&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('6')"&gt;6&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="num-key" onclick="appendDigit('7')"&gt;7&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('8')"&gt;8&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('9')"&gt;9&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="num-key gray"&gt;&lt;/button&gt;&lt;button class="num-key" onclick="appendDigit('0')"&gt;0&lt;/button&gt;&lt;button class="num-key" onclick="deleteDigit()"&gt;⌫&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer-cta"&gt;&lt;button class="btn-primary" onclick="goToReview()"&gt;Continuar&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- REVISAR --&gt;</p>
+<p class="p1">&lt;div class="screen" id="screen-review"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-back" onclick="navigateTo('screen-amount',true)"&gt;&lt;svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m12 19-7-7 7-7"/&gt;&lt;path d="M19 12H5"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-title"&gt;Revisá la transferencia&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="scroll-content" style="padding-top:8px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="review-summary"&gt;&lt;div class="review-label"&gt;Vas a transferir&lt;/div&gt;&lt;div class="review-amount"&gt;$ &lt;span id="review-amount-value"&gt;2.500&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="review-list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="review-row"&gt;&lt;div class="review-row-label"&gt;Para&lt;/div&gt;&lt;div class="review-row-value"&gt;María González&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="review-row"&gt;&lt;div class="review-row-label"&gt;Cuenta&lt;/div&gt;&lt;div class="review-row-value"&gt;maria.huerta.mp&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="review-row"&gt;&lt;div class="review-row-label"&gt;Banco&lt;/div&gt;&lt;div class="review-row-value"&gt;Banco Galicia&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="review-row"&gt;&lt;div class="review-row-label"&gt;Motivo&lt;/div&gt;&lt;div class="review-row-value"&gt;Varios&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="review-row"&gt;&lt;div class="review-row-label"&gt;Desde&lt;/div&gt;&lt;div class="review-row-value"&gt;Caja de ahorro&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer-cta"&gt;&lt;button class="btn-primary" onclick="processTransfer()"&gt;Transferir ahora&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- PROCESANDO --&gt;</p>
+<p class="p1">&lt;div class="screen processing-screen" id="screen-processing"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="processing-content"&gt;&lt;div class="spinner"&gt;&lt;/div&gt;&lt;div class="processing-title"&gt;Enviando transferencia&lt;/div&gt;&lt;div class="processing-subtitle"&gt;Esto demora unos segundos&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ÉXITO --&gt;</p>
+<p class="p1">&lt;div class="screen success-screen" id="screen-success"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="status-bar light"&gt;&lt;span class="status-time"&gt;9:41&lt;/span&gt;&lt;div class="status-icons"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="success-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="success-icon"&gt;&lt;svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="M20 6 9 17l-5-5"/&gt;&lt;/svg&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="success-label"&gt;Le transferiste&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="success-amount"&gt;$ &lt;span id="success-amount-value"&gt;2.500&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="success-recipient"&gt;a María González&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="success-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="save-contact-success"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;&lt;path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/&gt;&lt;/svg&gt;Guardar contacto&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="success-actions-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn-secondary"&gt;Compartir&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn-primary" onclick="finishFlow()"&gt;Listo&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- PROTO CONTROLS --&gt;</p>
+<p class="p1">&lt;div class="proto-controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="proto-panel" id="proto-panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="proto-tokens-info"&gt;&lt;strong&gt;📷 OCR + QR reales&lt;/strong&gt;&lt;br&gt;Tab Texto: detección real de Alias y CBU/CVU.&lt;br&gt;Tab QR: detección real de QR.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Saltar a pantalla&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpTo('screen-home')"&gt;Home&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpTo('screen-transferir')"&gt;Transferir&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpToScanner()"&gt;Hub de escaneo&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpToError()"&gt;Estado de error&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpTo('screen-confirm')"&gt;Confirmá la cuenta&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpTo('screen-amount')"&gt;Ingresá el monto&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="jumpTo('screen-success')"&gt;Éxito&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;hr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Onboarding&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="resetOnboarding()"&gt;Resetear coachmark&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="proto-info"&gt;&lt;strong&gt;Cómo usarlo:&lt;/strong&gt;&lt;br&gt;Tocá "Transferir" desde la home o el FAB azul para empezar.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="proto-toggle" onclick="togglePanel()"&gt;⚙&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const st={currentScreen:'screen-home',scannerEntryPoint:null,activeTab:'qr',amount:'',saveContact:false,flashOn:false,scanTimeout:null,hasSeenCoachmark:false,cameraReady:false};</p>
+<p class="p2"><br></p>
+<p class="p1">function showScreen(id){document.querySelectorAll('.screen').forEach(s=&gt;s.classList.remove('active'));document.getElementById(id).classList.add('active');st.currentScreen=id}</p>
+<p class="p1">function navigateTo(id,isBack){showScreen(id);if(id==='screen-transferir'&amp;&amp;!st.hasSeenCoachmark&amp;&amp;!isBack){setTimeout(showCoachmark,400)}}</p>
+<p class="p1">function jumpTo(id){clearScannerTimers();showScreen(id);if(id==='screen-transferir')hideCoachmark();togglePanel()}</p>
+<p class="p1">function showCoachmark(){const o=document.getElementById('coachmark'),t=document.getElementById('coachmark-tooltip'),a=document.getElementById('coachmark-arrow'),btn=document.getElementById('scan-btn-input');if(btn){const r=btn.getBoundingClientRect(),d=document.getElementById('device').getBoundingClientRect();t.style.top=(r.bottom-d.top+14)+'px';t.style.left='18px';t.style.right='18px';a.style.right=(d.right-r.right+8)+'px'}o.classList.add('active')}</p>
+<p class="p1">function hideCoachmark(){document.getElementById('coachmark').classList.remove('active')}</p>
+<p class="p1">function dismissCoachmark(){hideCoachmark();st.hasSeenCoachmark=true}</p>
+<p class="p1">function tryFeatureFromCoachmark(){hideCoachmark();st.hasSeenCoachmark=true;openScannerFromTransferir()}</p>
+<p class="p1">function resetOnboarding(){st.hasSeenCoachmark=false;togglePanel();alert('Coachmark reseteado. Volvé a entrar a Transferir desde la home.')}</p>
+<p class="p1">function openScannerFromFAB(){st.scannerEntryPoint='fab';st.activeTab='qr';setActiveTab('qr');showScreen('screen-scanner');startCamera()}</p>
+<p class="p1">function openScannerFromTransferir(){st.scannerEntryPoint='transferir';st.activeTab='texto';setActiveTab('texto');showScreen('screen-scanner');startCamera()}</p>
+<p class="p1">function setActiveTab(tab){st.activeTab=tab;document.querySelectorAll('.scanner-tab').forEach(t=&gt;t.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active');const r=document.getElementById('fake-receipt'),h=document.getElementById('scan-hint');if(tab==='texto'){r.style.display='none';h.textContent='Apuntá al Alias, CBU o CVU'}else if(tab==='qr'){r.style.display='none';h.textContent='Apuntá al código QR'}else{r.style.display='none';h.textContent='Apuntá al código de barras'}}</p>
+<p class="p1">function switchTab(tab){stopQrDetection();stopOcrDetection();resetReticle();setActiveTab(tab);if(tab==='qr'){if(st.cameraReady)startQrDetection();else startCamera();}else if(tab==='texto'){if(st.cameraReady)startOcrDetection();else startCamera();}}</p>
+<p class="p1">function resetReticle(){const r=document.getElementById('reticle'),h=document.getElementById('scan-hint');r.classList.remove('detecting','error');h.classList.remove('detecting','error');h.innerHTML='';h.textContent=st.activeTab==='qr'?'Apuntá al código QR':'Apuntá al Alias, CBU o CVU';document.getElementById('write-manual-btn').style.display='none'}</p>
+<p class="p1">function clearScannerTimers(){if(st.scanTimeout){clearTimeout(st.scanTimeout);st.scanTimeout=null}}</p>
+<p class="p1">function showDetectedSheet(){document.getElementById('sheet-overlay').classList.add('active');document.getElementById('sheet').classList.add('active')}</p>
+<p class="p1">function closeSheet(){document.getElementById('sheet-overlay').classList.remove('active');document.getElementById('sheet').classList.remove('active')}</p>
+<p class="p1">function continueFromSheet(){stopOcrDetection();stopQrDetection();stopCamera();closeSheet();setTimeout(()=&gt;{showScreen('screen-confirm')},300)}</p>
+<p class="p1">function resetScanner(){closeSheet();setTimeout(()=&gt;{resetReticle();if(st.activeTab==='qr'&amp;&amp;st.cameraReady)startQrDetection();else if(st.activeTab==='texto'&amp;&amp;st.cameraReady)startOcrDetection();},350)}</p>
+<p class="p1">function closeScanner(){clearScannerTimers();stopOcrDetection();stopQrDetection();stopCamera();closeSheet();resetReticle();navigateTo('screen-transferir',true)}</p>
+<p class="p1">function toggleFlash(){st.flashOn=!st.flashOn;document.getElementById('flash-btn').classList.toggle('active',st.flashOn)}</p>
+<p class="p1">function jumpToScanner(){st.scannerEntryPoint='transferir';st.activeTab='texto';setActiveTab('texto');showScreen('screen-scanner');resetReticle();startCamera();togglePanel()}</p>
+<p class="p1">function jumpToError(){st.activeTab='texto';setActiveTab('texto');showScreen('screen-scanner');clearScannerTimers();setTimeout(()=&gt;{const r=document.getElementById('reticle'),h=document.getElementById('scan-hint');r.classList.add('error');h.classList.add('error');h.innerHTML='&lt;div class="err-title"&gt;No pudimos leer el dato&lt;/div&gt;&lt;div class="err-sub"&gt;Acercá la cámara o probá con más luz&lt;/div&gt;';document.getElementById('write-manual-btn').style.display='flex'},200);togglePanel()}</p>
+<p class="p1">function goToManualInput(){closeScanner();setTimeout(()=&gt;document.getElementById('transfer-search').focus(),300)}</p>
+<p class="p1">function toggleSaveContact(){st.saveContact=!st.saveContact;document.getElementById('save-toggle').classList.toggle('active',st.saveContact)}</p>
+<p class="p1">function appendDigit(d){if(st.amount.length&gt;=8)return;st.amount+=d;updateAmountDisplay()}</p>
+<p class="p1">function deleteDigit(){st.amount=st.amount.slice(0,-1);updateAmountDisplay()}</p>
+<p class="p1">function updateAmountDisplay(){const el=document.getElementById('amount-value');el.textContent=st.amount===''?'0':parseInt(st.amount).toLocaleString('es-AR')}</p>
+<p class="p1">function goToReview(){if(st.amount===''||st.amount==='0'){st.amount='2500';updateAmountDisplay()}const f=parseInt(st.amount).toLocaleString('es-AR');document.getElementById('review-amount-value').textContent=f;document.getElementById('success-amount-value').textContent=f;navigateTo('screen-review',false)}</p>
+<p class="p1">function processTransfer(){showScreen('screen-processing');setTimeout(()=&gt;showScreen('screen-success'),2200)}</p>
+<p class="p1">function finishFlow(){st.amount='';st.saveContact=false;document.getElementById('save-toggle').classList.remove('active');updateAmountDisplay();showScreen('screen-home')}</p>
+<p class="p1">function togglePanel(){document.getElementById('proto-panel').classList.toggle('active')}</p>
+<p class="p2"><br></p>
+<p class="p1">// CÁMARA</p>
+<p class="p1">let cameraStream=null,qrScanLoop=null,ocrWorker=null,ocrLoading=false,ocrScanLoop=null,ocrTimeoutId=null,ocrAttempts=0;</p>
+<p class="p1">const PATTERN_CBU=/\b(\d{22})\b/,PATTERN_ALIAS=/\b([a-z0-9]{2,}\.[a-z0-9]{2,}(?:\.[a-z0-9]+){0,3})\b/i;</p>
+<p class="p2"><br></p>
+<p class="p1">async function startCamera(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const video=document.getElementById('camera-video'),perm=document.getElementById('camera-permission-msg');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(cameraStream)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>perm.style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cameraStream=stream;video.srcObject=stream;video.style.display='block';st.cameraReady=true;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(st.activeTab==='qr')startQrDetection();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>else if(st.activeTab==='texto')startOcrDetection();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){st.cameraReady=false;video.style.display='none';if(st.activeTab==='qr')perm.style.display='block';}</p>
+<p class="p1">}</p>
+<p class="p1">function stopCamera(){if(cameraStream){cameraStream.getTracks().forEach(t=&gt;t.stop());cameraStream=null}const v=document.getElementById('camera-video');v.srcObject=null;v.style.display='none';document.getElementById('camera-permission-msg').style.display='none';st.cameraReady=false;stopQrDetection()}</p>
+<p class="p2"><br></p>
+<p class="p1">function startQrDetection(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(qrScanLoop)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(typeof jsQR==='undefined')return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const video=document.getElementById('camera-video'),canvas=document.getElementById('qr-canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>qrScanLoop=setInterval(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(video.readyState!==video.HAVE_ENOUGH_DATA||st.activeTab!=='qr')return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas.width=video.videoWidth;canvas.height=video.videoHeight;ctx.drawImage(video,0,0,canvas.width,canvas.height);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>try{const d=ctx.getImageData(0,0,canvas.width,canvas.height),code=jsQR(d.data,d.width,d.height,{inversionAttempts:'dontInvert'});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(code&amp;&amp;code.data){stopQrDetection();onQrDetected(code.data)}}catch(e){}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},250);</p>
+<p class="p1">}</p>
+<p class="p1">function stopQrDetection(){if(qrScanLoop){clearInterval(qrScanLoop);qrScanLoop=null}}</p>
+<p class="p1">function onQrDetected(data){if(navigator.vibrate)navigator.vibrate(50);const s=document.getElementById('sheet');s.querySelector('.sheet-name').textContent='María González';s.querySelector('.sheet-detail').textContent=data.length&gt;60?data.substring(0,60)+'...':data;s.querySelector('.sheet-status-text').textContent='QR detectado';showDetectedSheet()}</p>
+<p class="p2"><br></p>
+<p class="p1">function isValidCBU(cbu){if(!/^\d{22}$/.test(cbu))return false;const b1=cbu.substring(0,8),w1=[7,1,3,9,7,1,3];let s1=0;for(let i=0;i&lt;7;i++)s1+=parseInt(b1[i])*w1[i];if((10-(s1%10))%10!==parseInt(b1[7]))return false;const b2=cbu.substring(8),w2=[3,9,7,1,3,9,7,1,3,9,7,1,3];let s2=0;for(let i=0;i&lt;13;i++)s2+=parseInt(b2[i])*w2[i];return (10-(s2%10))%10===parseInt(b2[13])}</p>
+<p class="p1">function getBankFromCBU(c){const m={'007':'Banco Galicia','011':'Banco Nación','014':'Banco Provincia','017':'BBVA','027':'Banco Supervielle','072':'Banco Santander','143':'Brubank','150':'HSBC','191':'Banco Credicoop','259':'Itaú','315':'Banco Macro','999':'Mercado Pago','000':'Ualá'};return m[c.substring(0,3)]||'Cuenta bancaria'}</p>
+<p class="p2"><br></p>
+<p class="p1">async function initOcrWorker(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(ocrWorker||ocrLoading)return ocrWorker;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(typeof Tesseract==='undefined')return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ocrLoading=true;const lm=document.getElementById('ocr-loading-msg'),pr=document.getElementById('ocr-loading-progress');lm.style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pr.textContent='Descargando modelo...';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ocrWorker=await Tesseract.createWorker('spa',1,{logger:m=&gt;{if(m.status.includes('loading language'))pr.textContent=`Descargando (${Math.round((m.progress||0)*100)}%)`;else if(m.status.includes('initializing'))pr.textContent='Inicializando...';}});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>await ocrWorker.setParameters({tessedit_char_whitelist:'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-_ '});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ocrLoading=false;lm.style.display='none';return ocrWorker;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){ocrLoading=false;lm.style.display='none';return null}</p>
+<p class="p1">}</p>
+<p class="p1">async function processOcrFrame(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!ocrWorker||st.activeTab!=='texto')return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const v=document.getElementById('camera-video'),c=document.getElementById('qr-canvas'),ctx=c.getContext('2d',{willReadFrequently:true});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(v.readyState!==v.HAVE_ENOUGH_DATA)return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const tw=Math.min(800,v.videoWidth),r=tw/v.videoWidth;c.width=tw;c.height=v.videoHeight*r;ctx.drawImage(v,0,0,c.width,c.height);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{const res=await ocrWorker.recognize(c),text=(res.data.text||'').replace(/\s+/g,' ');const cm=text.match(PATTERN_CBU);if(cm&amp;&amp;isValidCBU(cm[1]))return{type:'cbu',value:cm[1],bank:getBankFromCBU(cm[1])};const am=text.match(PATTERN_ALIAS);if(am){const al=am[1].toLowerCase();if(al.length&gt;=6&amp;&amp;al.length&lt;=30&amp;&amp;!al.includes('..'))return{type:'alias',value:al,bank:'Cuenta bancaria'}}return null}catch(e){return null}</p>
+<p class="p1">}</p>
+<p class="p1">async function startOcrDetection(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(ocrScanLoop||st.activeTab!=='texto')return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!ocrWorker){await initOcrWorker();if(!ocrWorker)return}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(st.activeTab!=='texto')return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ocrAttempts=0;document.getElementById('scan-hint').textContent='Apuntá al Alias, CBU o CVU';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ocrScanLoop=setInterval(async()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(st.activeTab!=='texto'){stopOcrDetection();return}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ocrAttempts++;if(ocrAttempts===1)document.getElementById('scan-hint').textContent='Buscando dato...';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const det=await processOcrFrame();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(det){stopOcrDetection();onTextDetected(det)}else if(ocrAttempts&gt;=10){stopOcrDetection();showOcrError()}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},1500);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ocrTimeoutId=setTimeout(()=&gt;{if(ocrScanLoop){stopOcrDetection();showOcrError()}},20000);</p>
+<p class="p1">}</p>
+<p class="p1">function stopOcrDetection(){if(ocrScanLoop){clearInterval(ocrScanLoop);ocrScanLoop=null}if(ocrTimeoutId){clearTimeout(ocrTimeoutId);ocrTimeoutId=null}}</p>
+<p class="p1">function onTextDetected(det){const r=document.getElementById('reticle'),h=document.getElementById('scan-hint');r.classList.add('detecting');h.classList.add('detecting');h.innerHTML='&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" viewBox="0 0 24 24"&gt;&lt;path d="M20 6 9 17l-5-5"/&gt;&lt;/svg&gt;Dato detectado';if(navigator.vibrate)navigator.vibrate(50);const s=document.getElementById('sheet');s.querySelector('.sheet-status-text').textContent=det.type==='cbu'?'CBU detectado':'Alias detectado';s.querySelector('.sheet-name').textContent='María González';s.querySelector('.sheet-detail').textContent=`${det.value} · ${det.bank}`;setTimeout(showDetectedSheet,600)}</p>
+<p class="p1">function showOcrError(){const r=document.getElementById('reticle'),h=document.getElementById('scan-hint');r.classList.remove('detecting');r.classList.add('error');h.classList.remove('detecting');h.classList.add('error');h.innerHTML='&lt;div class="err-title"&gt;No pudimos leer el dato&lt;/div&gt;&lt;div class="err-sub"&gt;Acercá la cámara o probá con más luz&lt;/div&gt;';document.getElementById('write-manual-btn').style.display='flex'}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
